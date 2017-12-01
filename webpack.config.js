@@ -10,7 +10,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, "build"),
-    filename: 'scenes-plugin.js'
+    filename: 'plugin.js'
   },
   resolveLoader: {
     modulesDirectories: ['node_modules']
@@ -18,7 +18,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify("production")
+        NODE_ENV: JSON.stringify("development")
       }
     }),
     new CopyWebpackPlugin([

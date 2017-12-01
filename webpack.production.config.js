@@ -2,14 +2,15 @@ var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-const WebpackShellPlugin = require('webpack-shell-plugin');
+var WebpackShellPlugin = require('webpack-shell-plugin');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: [
     './src/index.js'
   ],
   output: {
-    path: path.join(__dirname, "build"),
+    path: path.join(__dirname, "dist"),
     filename: 'scenes-plugin.js'
   },
   resolveLoader: {
@@ -22,10 +23,12 @@ module.exports = {
       }
     }),
     new webpack.NoErrorsPlugin(),
-    new webpack.IgnorePlugin(/vertx/)
+    new webpack.IgnorePlugin(/vertx/),
+    new UglifyJsPlugin({
+      sourceMap: false
+    })
   ],
-  debug: true,
-  devtool: 'source-map',
+  debug: false,
   resolve: {
     extensions: ['', '.js']
   },

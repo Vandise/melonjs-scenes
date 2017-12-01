@@ -1,15 +1,17 @@
+import { PLUGIN_NAME } from './settings';
 import SceneManager from './plugin/scene/sceneManager'
+import Styles from './styles/main.scss';
 
 //
 // ES6 endpoint
 //
-export default ScenesManager;
+export default SceneManager;
 
 //
 // global JS endpoint
 //
 (($) => {
 
-  $.scenePlugin = ScenesManager;
+  $[PLUGIN_NAME] = SceneManager;
 
 })(window);

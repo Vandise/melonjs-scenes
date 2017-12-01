@@ -1,0 +1,35 @@
+#melon-scenemanager-dialog {
+  color: white;
+  width: 800px;
+  background-color: #000;
+  position: relative;
+  top: -1.2em;
+
+  figure {
+    display: inline-block;
+    margin: 0px;
+  }
+
+  .content {
+
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 1em;
+
+    .dialog-character {
+      vertical-align: top;
+    }
+  
+    .dialog-text {
+      vertical-align: top;
+      margin-left: 3em;
+    }
+
+  }
+
+}
+
+.dialog-box {
+  padding: 1em;
+  border: 3px solid white;
+}

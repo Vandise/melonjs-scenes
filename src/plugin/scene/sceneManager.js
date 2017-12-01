@@ -1,5 +1,7 @@
 import { PLUGIN_VERSION, PLUGIN_NAME, CLEAR_DIALOG_KEY } from '../../settings';
 import Scene from './scene';
+import events from '../events/events';
+import romeoScene from './testScene';
 
 export default class SceneManager extends me.plugin.Base
 {
@@ -17,7 +19,7 @@ export default class SceneManager extends me.plugin.Base
     this.entities   = {};
 
     // event types that can be utlized
-    this.eventHandlers = {};
+    this.eventHandlers = events;
 
     // overall state of the entire scene plugin
     this.state      = {
@@ -25,6 +27,10 @@ export default class SceneManager extends me.plugin.Base
         enter: false
       }
     };
+ 
+    this.testScene = romeoScene;
+ 
+    this.currentScene = null;
     
   }
 
@@ -32,7 +38,7 @@ export default class SceneManager extends me.plugin.Base
   {
     (($) => {
       $.document.body.onkeypress = (e) => {
-        if (e.charCode == CLEAR_DIALOG_KEY) { (me.plugins[pluginName]).keypressed.enter = true; }
+        if (e.charCode == CLEAR_DIALOG_KEY) { this.state.keypressed.enter = true; }
       }
     })(window);
   }
@@ -40,7 +46,7 @@ export default class SceneManager extends me.plugin.Base
 
   clearKeys()
   {
-    for (let key in this.keypressed)
+    for (let key in this.state.keypressed)
     {
       this.state.keypressed[key] = false;
     }
@@ -70,7 +76,9 @@ export default class SceneManager extends me.plugin.Base
     {
       throw `No scene named ${sceneName} was registered. You can add it with registerScene(alias, sceneEvents)`;
     }
-    (this.scenes[sceneName]).run();
+
+    this.currentScene = (this.scenes[sceneName]);
+    this.currentScene.run();
   }
 
 }
